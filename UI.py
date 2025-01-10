@@ -83,9 +83,14 @@ with column_Alpha:
                 statement = "I apologize for the inconvenience caused and please be assured that I will do my best to help you further."
             else:
                 statement = ""
+            sentence = st.checkbox("FTR")
+            if sentence:
+                statement2 = "Please follow the steps below and let me know the status:"
+            else:
+                statement2 = ""
             message_blockfc, probingstatement, selectedprobingQuestions, request_information_block, exceptreply, privatestep, privateinfo = contextforemail()
             pQuestions = "\n".join(selectedprobingQuestions)
-            emailTemplate = f"Hello,\n\nThank you for contacting NVIDIA Customer Care.\n\nThis is Santhoshsivan, assisting you in troubleshooting the issue you are experiencing.\n\nFrom the description, I understand that {paraphrase}.\n\n{statement}\n\n{message_blockfc}\n\n{probingstatement}{pQuestions}\n\n{request_information_block}\n\nPlease take your time and let me know the results at your earliest convenience. If there are any questions or concerns, feel free to contact me.\n\n{exceptreply}Best regards,\nSanthoshsivan,\nNVIDIA Customer Care "
+            emailTemplate = f"Hello,\n\nThank you for contacting NVIDIA Customer Care.\n\nThis is Santhoshsivan, assisting you in troubleshooting the issue you are experiencing.\n\nFrom the description, I understand that {paraphrase}.\n\n{statement}\n{statement2}\n\n{message_blockfc}\n\n{probingstatement}{pQuestions}\n\n{request_information_block}\n\nPlease take your time and let me know the results at your earliest convenience. If there are any questions or concerns, feel free to contact me.\n\n{exceptreply}Best regards,\nSanthoshsivan,\nNVIDIA Customer Care "
             privatenote = f"Information (or) Troubleshooting:\n{privatestep}\n\nRequested Information:\n{privateinfo}"
         if type == "Query":
             steps = st.multiselect("Steps", list_steps())
@@ -115,9 +120,14 @@ with column_Alpha:
             statement = "\n\nI am sorry the issue still persist, do not worry, I will help you with the issue you are experiencing.\n"
         else:
             statement = ""
+        sentence = st.checkbox("FTR")
+        if sentence:
+                statement2 = "Please follow the steps below and let me know the status:"
+            else:
+                statement2 = ""
         message_blockfc, probingstatement, selectedprobingQuestions, request_information_block, exceptreply, privatestep, privateinfo = contextforemail()
         pQuestions = "\n".join(selectedprobingQuestions)
-        emailTemplate = f"Hello,\n\nThank you for taking the time to respond.{statement}\n{message_blockfc}{probingstatement}{pQuestions}\n\n{request_information_block}\nPlease take your time and let me know the results at your earliest convenience. If there are any questions or concerns, feel free to contact me.\n\n{exceptreply}Best regards,\nSanthoshsivan,\nNVIDIA Customer Care "
+        emailTemplate = f"Hello,\n\nThank you for taking the time to respond.{statement}\n\n{statement2}\n{message_blockfc}{probingstatement}{pQuestions}\n\n{request_information_block}\nPlease take your time and let me know the results at your earliest convenience. If there are any questions or concerns, feel free to contact me.\n\n{exceptreply}Best regards,\nSanthoshsivan,\nNVIDIA Customer Care "
         privatenote = f"Steps Performed:\n{stepeperfomedprivate}\n\nInformation (or) Troubleshooting:\n{privatestep}\n\nRequested Information:\n{privateinfo}"
     if template == "RMA":
         reason = st.text_input("Reason")
